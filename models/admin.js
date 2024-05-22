@@ -56,19 +56,28 @@ adminSchema.pre("save", async function (next) {
     }
 });
 
+//Compare hashed password
+adminSchema.methods.comparePassword = async function (password) {
+    try {
+        return await bcrypt.compare(password, this.password);
+    } catch (error) {
+        throw error;
+    }
+}
+
 //Inloggning Admin
 //Endast username och password skickas in
 adminSchema.statics.login = async function (username, password) {
     try {
         const admin = await this.findOne({ username });
         if (!admin) {
-            throw new Error("Incorrects username/password")
+            throw new Error("Fel Användarnamn/Lösenord")
         }
 
         const passwordMatch = await admin.comparePassword(password);
 
         if (!passwordMatch) {
-            throw new Error("Incorrects username/password");
+            throw new Error("Fel Användarnamn/Lösenord");
         } else {
             return admin;
         }

@@ -4,6 +4,10 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 require("dotenv").config();
+
+//Validering av epost
+const validator = require("validator")
+
 //Token
 const jwt = require("jsonwebtoken");
 
@@ -27,10 +31,21 @@ router.post("/registrera", async (req, res) => {
         const { username, firstname, lastname, email, password } = req.body;
 
         //Validering av input
-        if (!username && firstname && lastname && email && password) {
+        if (!username && !firstname && !lastname && !email && !password) {
             return res.status(400).json({ error: "Skicka användarnamn, förnamn, efternamn, epost" });
+        }
 
-        } else {
+        // Validera e-postadressens format
+        if (!validator.isEmail(email)) {
+            return res.status(400).json({ error: "Ogiltig e-post, skicka giltlig e-postadress" });
+        }
+
+        // Validera antal tecken lösenord
+        if (password.length <= 4) {
+            return res.status(400).json({ error: "Lösenordet måste vara minst 5 tecken" });
+        }
+
+        else {
             //Korrekt input
             const adminUser = new admin({ username, firstname, lastname, email, password });
             await adminUser.save();
@@ -38,10 +53,92 @@ router.post("/registrera", async (req, res) => {
         }
 
     } catch (error) {
-        res.status(500).json({ error: "Det gick inte att registrera användare"})
+        res.status(500).json({ error: "Det gick inte att registrera användare" })
     }
 })
 
+//Route för att logga in som Admin
+router.post("/login", async (req, res) => {
+
+    console.log("login called...");
+
+    try {
+        const { username, password } = req.body;
+
+        //Validering av inloggnings input
+        if (!username || !password) {
+            return res.status(400).json({ error: "Skicka användarnamn och lösenord" });
+
+        }
+
+        //Validera om användarnamn finns i databasen
+        const adminUser = await admin.findOne({ username });
+        if (!adminUser) {
+            return res.status(400).json({ error: "Fel Användarnamn/Lösenord" })
+        }
+        console.log("login called 2...");
+
+        //Kontroll av lösenord
+        const passwordMatch = await adminUser.comparePassword(password);
+        console.log("login called 3...");
+
+        //Om lösenord ej stämmer
+        if (!passwordMatch) {
+            return res.status(400).json({ error: "Fel Användarnamn/Lösenord" });
+
+        } else {
+            console.log("login called 4...");
+
+            //Skapa token för inloggning ifall lösenord stämmer
+            const payload = { username: username };
+
+            //Token är aktiv i 1h
+            const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, { expiresIn: '1h' });
+
+            const response = {
+                message: "Användare är inloggad",
+                token: token
+            }
+
+            res.status(200).json({ response });
+            console.log("Du är inloggad");
+        }
+    }
+    catch (error) {
+        res.status(500).json({ error: "Server fel" });
+    }
+
+})
+
+//Vid lyckad inloggning ska användare skickas till skyddad route
+router.get("/admin", authToken, async (req, res) => {
+    console.log("Admin: Du har tillgång till skyddad data");
+
+    try {
+        const adminUsers = await admin.find().select("-_id firstname lastname username");
+        res.status(200).json({ adminUsers });
+    } catch (error) {
+        res.status(500).json({ error: error });
+    }
+});
+
+//Validera token för åtkomst till skyddad route
+function authToken(req, res, next) {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1]; //Token
+
+    if (token == null) {
+        return res.status(401).json({ message: "Token missing" });
+    }
+    jwt.verify(token, process.env.JWT_SECRET_KEY, (err, username) => {
+        if (err) {
+            return res.status(403).json({ message: "Not correct JWT" });
+        } else {
+            req.username = username;
+            next();
+        }
+    });
+}
 
 
 //Exportera modulen
