@@ -6,8 +6,10 @@ const port = process.env.PORT || 3000;
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 
+//Importerar från routes
 const adminAuthRoute = require("./routes/adminAuthRoute");
 const menuAuthRoute = require("./routes/menuAuthRoute");
+const bookingAuthRoute = require("./routes/bookingAuthRoute");
 
 //Token
 const jwt = require("jsonwebtoken");
@@ -26,3 +28,4 @@ app.listen(port, () => {
 //Routes
 app.use("", adminAuthRoute);
 app.use("", menuAuthRoute);
+app.use("", bookingAuthRoute);

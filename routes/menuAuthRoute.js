@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 
 
-//Importerar user model
+//Importerar menu model
 const menu = require("../models/menu");
 
 //Importerar authToken
