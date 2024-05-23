@@ -8,11 +8,12 @@ require("dotenv").config();
 //Validering av epost
 const validator = require("validator")
 
-//Token
-const jwt = require("jsonwebtoken");
-
 //Importerar user model
 const admin = require("../models/admin");
+
+
+//Importerar authToken
+const authToken = require("./authToken");
 
 //Connect till MongoDb
 mongoose.set("strictQuery", false);
@@ -121,24 +122,6 @@ router.get("/admin", authToken, async (req, res) => {
         res.status(500).json({ error: error });
     }
 });
-
-//Validera token för åtkomst till skyddad route
-function authToken(req, res, next) {
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1]; //Token
-
-    if (token == null) {
-        return res.status(401).json({ message: "Token missing" });
-    }
-    jwt.verify(token, process.env.JWT_SECRET_KEY, (err, username) => {
-        if (err) {
-            return res.status(403).json({ message: "Not correct JWT" });
-        } else {
-            req.username = username;
-            next();
-        }
-    });
-}
 
 
 //Exportera modulen

@@ -7,6 +7,7 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 
 const adminAuthRoute = require("./routes/adminAuthRoute");
+const menuAuthRoute = require("./routes/menuAuthRoute");
 
 //Token
 const jwt = require("jsonwebtoken");
@@ -24,3 +25,4 @@ app.listen(port, () => {
 
 //Routes
 app.use("", adminAuthRoute);
+app.use("", menuAuthRoute);
