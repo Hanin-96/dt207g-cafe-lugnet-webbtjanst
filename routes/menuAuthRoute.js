@@ -27,10 +27,12 @@ mongoose.connect(process.env.Database).then(() => {
 router.get("/menu", async (req, res) => {
     try {
         let result = await menu.find({});
-
+        console.log("Hämtar menyn")
         return res.json(result);
 
     } catch (error) {
+        console.log("Det gick ej hämta menyn");
+        console.log(error);
         return res.status(500).json(error);
     }
 });
