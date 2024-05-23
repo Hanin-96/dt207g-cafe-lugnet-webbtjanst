@@ -14,7 +14,7 @@ const authToken = require("./authToken");
 
 //Connect till MongoDb
 mongoose.set("strictQuery", false);
-mongoose.connect(process.env.Database).then(() => {
+mongoose.connect(process.env.DATABASE).then(() => {
     console.log("Connected to MongoDB");
 }).catch((error) => {
     console.error("Connection to MongoDB failed")
@@ -27,7 +27,7 @@ mongoose.connect(process.env.Database).then(() => {
 router.get("/menu", async (req, res) => {
     try {
         let result = await menu.find({});
-        console.log("Hämtar menyn")
+        console.log("Hämtar menyn");
         return res.json(result);
 
     } catch (error) {
