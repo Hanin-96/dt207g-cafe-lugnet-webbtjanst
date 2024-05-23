@@ -11,9 +11,6 @@ const adminAuthRoute = require("./routes/adminAuthRoute");
 const menuAuthRoute = require("./routes/menuAuthRoute");
 const bookingAuthRoute = require("./routes/bookingAuthRoute");
 
-//Token
-const jwt = require("jsonwebtoken");
-
 
 // Aktivera CORS middleware för alla rutter
 app.use(cors());

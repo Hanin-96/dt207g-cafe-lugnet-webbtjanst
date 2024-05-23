@@ -11,6 +11,8 @@ const validator = require("validator")
 //Importerar user model
 const admin = require("../models/admin");
 
+const jwt = require("jsonwebtoken");
+
 
 //Importerar authToken
 const authToken = require("./authToken");
@@ -106,10 +108,10 @@ router.post("/login", async (req, res) => {
         }
     }
     catch (error) {
-        res.status(500).json({ error: "Server fel" });
+        res.status(500).json({ error: "Server fel" + error});
     }
 
-})
+});
 
 //Vid lyckad inloggning ska användare skickas till skyddad route
 router.get("/admin", authToken, async (req, res) => {

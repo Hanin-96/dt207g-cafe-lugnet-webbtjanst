@@ -35,7 +35,7 @@ const bookingSchema = new mongoose.Schema({
         trim: true
     },
     date: {
-        type: Date,
+        type: String,
         required: true,
         unique: false,
         trim: true
