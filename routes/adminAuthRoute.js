@@ -27,7 +27,7 @@ mongoose.connect(process.env.DATABASE).then(() => {
 
 
 //Route för registrering av Admin med post
-router.post("/registrera", async (req, res) => {
+router.post("/register", async (req, res) => {
 
     try {
         //Skickar in följande objekt format

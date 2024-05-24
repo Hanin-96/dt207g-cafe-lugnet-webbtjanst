@@ -24,7 +24,7 @@ mongoose.connect(process.env.DATABASE).then(() => {
 //Menu routing
 
 //Hämtar alla bokningar, ska hämtas i admin
-router.get("/bokning/list", authToken, async (req, res) => {
+router.get("/booking/list", authToken, async (req, res) => {
     try {
         let bookingResult = await booking.find({});
 
@@ -36,7 +36,7 @@ router.get("/bokning/list", authToken, async (req, res) => {
 });
 
 //Lägger till ny bookning
-router.post("/bokning", async (req, res) => {
+router.post("/booking", async (req, res) => {
 
     //Skapa ny maträtt och lägga in i databasen
     try {
