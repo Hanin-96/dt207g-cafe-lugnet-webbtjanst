@@ -35,7 +35,7 @@ router.post("/register", async (req, res) => {
 
         //Validering av input
         if (!username && !firstname && !lastname && !email && !password) {
-            return res.status(400).json({ error: "Skicka användarnamn, förnamn, efternamn, epost" });
+            return res.status(400).json({ error: "Skicka användarnamn, förnamn, efternamn, epost & Lösenord" });
         }
 
         // Validera e-postadressens format
