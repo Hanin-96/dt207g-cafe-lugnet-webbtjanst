@@ -103,7 +103,7 @@ router.post("/login", async (req, res) => {
                 token: token
             }
 
-            res.status(200).json({ response });
+            res.status(200).json(response);
             console.log("Du är inloggad");
         }
     }
