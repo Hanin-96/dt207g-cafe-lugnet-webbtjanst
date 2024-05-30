@@ -41,14 +41,14 @@ router.post("/booking", async (req, res) => {
     //Skapa ny maträtt och lägga in i databasen
     try {
         //Ett objekt med input skickas in
-        const { firstname, lastname, phonenumber, email, guests, date } = req.body;
+        const { firstname, lastname, phonenumber, email, guests, date, time, bookingMessage } = req.body;
 
         //Validera input
-        if (!firstname || !lastname || !phonenumber || !email || !guests || !date) {
+        if (!firstname || !lastname || !phonenumber || !email || !guests || !date || !time) {
             return res.status(400).json({ error: "Fyll i alla fält!" });
 
         } else {
-            const newBooking = new booking({ firstname, lastname, phonenumber, email, guests, date });
+            const newBooking = new booking({ firstname, lastname, phonenumber, email, guests, date, time, bookingMessage});
 
             await newBooking.save();
             res.status(201).json({ message: "Bokning har lagts till" });
