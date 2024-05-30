@@ -48,7 +48,7 @@ const bookingSchema = new mongoose.Schema({
     },
     bookingMessage: {
         type: String,
-        required: true,
+        required: false,
         unique: false,
         trim: true
     },
