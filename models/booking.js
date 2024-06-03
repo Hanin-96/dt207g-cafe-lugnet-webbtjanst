@@ -40,12 +40,15 @@ const bookingSchema = new mongoose.Schema({
         unique: false,
         trim: true
     },
+<<<<<<< HEAD
     time: {
         type: String,
         required: true,
         unique: false,
         trim: true
     },
+=======
+>>>>>>> develop
     bookingMessage: {
         type: String,
         required: false,
