@@ -41,7 +41,7 @@ router.post("/booking", async (req, res) => {
     //Skapa ny bokning och lägga in i databasen
     try {
         //Ett objekt med input skickas in
-        const { firstname, lastname, phonenumber, email, guests, date, time, bookingMessage } = req.body;
+        let { firstname, lastname, phonenumber, email, guests, date, time, bookingMessage } = req.body;
 
         //Validera input
         if (!firstname || !lastname || !phonenumber || !email || !guests || !date || !time) {
