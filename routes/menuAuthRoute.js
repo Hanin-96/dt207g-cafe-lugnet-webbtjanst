@@ -64,13 +64,16 @@ router.post("/menu/dish", authToken, async (req, res) => {
     //Skapa ny maträtt och lägga in i databasen
     try {
         //Ett objekt med input skickas in
-        const { title, category, description, allergy, price } = req.body;
+        let { title, category, description, allergy, price } = req.body;
 
         //Validera input
-        if (!title || !category || !description || !allergy || !price) {
+        if (!title || !category || !description || !price) {
             return res.status(400).json({ error: "Fyll i alla fält!" });
 
         } else {
+            if(!allergy) {
+                allergy = "";
+            }
             const newDish = new menu({ title, category, description, allergy, price });
 
             await newDish.save();
