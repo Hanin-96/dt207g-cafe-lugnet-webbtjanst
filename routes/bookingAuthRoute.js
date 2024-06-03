@@ -35,11 +35,7 @@ router.get("/booking/list", authToken, async (req, res) => {
     }
 });
 
-<<<<<<< HEAD
-//Lägger till ny bookning
-=======
 //Lägger till ny bokning
->>>>>>> develop
 router.post("/booking", async (req, res) => {
 
     //Skapa ny bokning och lägga in i databasen
