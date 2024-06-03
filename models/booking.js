@@ -40,6 +40,12 @@ const bookingSchema = new mongoose.Schema({
         unique: false,
         trim: true
     },
+    bookingMessage: {
+        type: String,
+        required: false,
+        unique: false,
+        trim: true
+    },
     created: {
         type: Date,
         default: Date.now
