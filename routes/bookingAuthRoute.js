@@ -52,14 +52,10 @@ router.post("/booking", async (req, res) => {
             return res.status(400).json({ error: "Fyll i alla fält!" });
 
         } else {
-<<<<<<< HEAD
-            const newBooking = new booking({ firstname, lastname, phonenumber, email, guests, date, time, bookingMessage});
-=======
             if(!bookingMessage) {
                 bookingMessage = "";
             }
             const newBooking = new booking({ firstname, lastname, phonenumber, email, guests, date, time, bookingMessage });
->>>>>>> develop
 
             await newBooking.save();
             res.status(201).json({ message: "Bokning har lagts till" });
