@@ -74,7 +74,7 @@ router.post("/menu/dish", authToken, async (req, res) => {
             if(!allergy) {
                 allergy = "";
             }
-            const newDish = new menu({ title, category, description, allergy, price });
+            let newDish = new menu({ title, category, description, allergy, price });
 
             await newDish.save();
             res.status(201).json({ message: "Ny maträtt har lagts till i menyn" });
