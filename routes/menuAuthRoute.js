@@ -27,12 +27,12 @@ mongoose.connect(process.env.DATABASE).then(() => {
 router.get("/menu", async (req, res) => {
     try {
         let result = await menu.find({});
-        console.log("Hämtar menyn");
+        //console.log("Hämtar menyn");
         return res.json(result);
 
     } catch (error) {
-        console.log("Det gick ej hämta menyn");
-        console.log(error);
+        //console.log("Det gick ej hämta menyn");
+        //console.log(error);
         return res.status(500).json(error);
     }
 });
@@ -81,7 +81,7 @@ router.post("/menu/dish", authToken, async (req, res) => {
         }
 
     } catch (error) {
-        return res.status(500).json(error);
+        return res.status(500).json({error: "Något gick fel" + error});
     }
 });
 
@@ -114,7 +114,7 @@ router.put("/menu/:dishId", authToken, async (req, res) => {
             //Uppdaterar specifik maträtt utifrån id och lägger in det nya objekt
             let updatedDishResult = await menu.updateOne({ _id: dishId }, { $set: updateFields });
 
-            console.log(updatedDishResult, updateFields);
+            //console.log(updatedDishResult, updateFields);
             return res.json(updatedDishResult);
 
         } else {
@@ -122,7 +122,7 @@ router.put("/menu/:dishId", authToken, async (req, res) => {
         }
 
     } catch (error) {
-        return res.status(500).json(error);
+        return res.status(500).json({error: "Något gick fel" + error});
     }
 });
 
