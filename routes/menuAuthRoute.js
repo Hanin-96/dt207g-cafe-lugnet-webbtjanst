@@ -71,9 +71,7 @@ router.post("/menu/dish", authToken, async (req, res) => {
             return res.status(400).json({ error: "Fyll i alla fält!" });
 
         } else {
-            if(!allergy) {
-                allergy = "";
-            }
+
             let newDish = new menu({ title, category, description, allergy, price });
 
             await newDish.save();
