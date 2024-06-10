@@ -71,7 +71,9 @@ router.post("/menu/dish", authToken, async (req, res) => {
             return res.status(400).json({ error: "Fyll i alla fält!" });
 
         } else {
-
+            if(!allergy) {
+                allergy = "";
+            }
             let newDish = new menu({ title, category, description, allergy, price });
 
             await newDish.save();
@@ -94,11 +96,15 @@ router.put("/menu/:dishId", authToken, async (req, res) => {
         const dishTitle = req.body.title;
         const dishCategory = req.body.category;
         const dishDescription = req.body.description;
-        const dishAllergy = req.body.allergy;
+        let dishAllergy = req.body.allergy;
         const dishPrice = req.body.price;
 
         //Om alla input fält är uppdaterade
-        if (dishTitle && dishCategory && dishDescription && dishAllergy && dishPrice) {
+        if (dishTitle && dishCategory && dishDescription && dishPrice) {
+
+            if(!dishAllergy) {
+                dishAllergy = "";
+            }
 
             //Skickar in nytt objekt med nya värden som ersätter gamla
             const updateFields = {
