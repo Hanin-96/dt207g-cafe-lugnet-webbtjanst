@@ -11,18 +11,24 @@ const adminAuthRoute = require("./routes/adminAuthRoute");
 const menuAuthRoute = require("./routes/menuAuthRoute");
 const bookingAuthRoute = require("./routes/bookingAuthRoute");
 
+// Aktivera CORS middleware för rutter
+const corsRoute = {
+    origin: 'https://adorable-pony-2cfe6c.netlify.app', 
+    methods: ['GET', 'POST', 'PUT', 'DELETE']
+}
 
-// Aktivera CORS middleware för alla rutter
-app.use(cors());
+app.use(cors(corsRoute));
+
+
+//Express JSON middleware
 app.use(express.json());
-
-
-//Starta igång server
-app.listen(port, () => {
-    console.log("servern är startad på port: " + port);
-});
 
 //Routes
 app.use("", adminAuthRoute);
 app.use("", menuAuthRoute);
 app.use("", bookingAuthRoute);
+
+//Starta igång server
+app.listen(port, () => {
+    console.log("servern är startad på port: " + port);
+});
