@@ -63,7 +63,7 @@ router.post("/register", async (req, res) => {
 //Route för att logga in som Admin
 router.post("/login", async (req, res) => {
 
-    console.log("login called...");
+    //console.log("login called...");
 
     try {
         const { username, password } = req.body;
@@ -79,18 +79,18 @@ router.post("/login", async (req, res) => {
         if (!adminUser) {
             return res.status(400).json({ error: "Fel Användarnamn/Lösenord" })
         }
-        console.log("login called 2...");
+        //console.log("login called 2...");
 
         //Kontroll av lösenord
         const passwordMatch = await adminUser.comparePassword(password);
-        console.log("login called 3...");
+        //console.log("login called 3...");
 
         //Om lösenord ej stämmer
         if (!passwordMatch) {
             return res.status(400).json({ error: "Fel Användarnamn/Lösenord" });
 
         } else {
-            console.log("login called 4...");
+            //console.log("login called 4...");
 
             //Skapa token för inloggning ifall lösenord stämmer
             const payload = { username: username };

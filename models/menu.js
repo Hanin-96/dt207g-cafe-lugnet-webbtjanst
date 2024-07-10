@@ -1,4 +1,4 @@
-//Registrera inloggning för admin
+//Lagring av Maträtter
 
 const mongoose = require("mongoose");
 
