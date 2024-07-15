@@ -177,10 +177,12 @@ Menu:
 
 
 GET: /login:
+```
 {
  "username" : "username",
  "password" : "password"
 }
+```
 
 ger följande svar
 ```
