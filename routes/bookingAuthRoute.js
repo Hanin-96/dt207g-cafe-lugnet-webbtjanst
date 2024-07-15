@@ -21,7 +21,6 @@ mongoose.connect(process.env.DATABASE).then(() => {
 });
 
 
-//Menu routing
 
 //Hämtar alla bokningar, ska hämtas i admin
 router.get("/booking/list", authToken, async (req, res) => {
@@ -116,7 +115,7 @@ router.put("/booking/:bookingId", authToken, async (req, res) => {
 
 //Ta bort specifik bokning från databasen
 
-router.delete("/booking/:bookingId", async (req, res) => {
+router.delete("/booking/:bookingId", authToken, async (req, res) => {
     try {
         let bookingId = req.params.bookingId;
 
