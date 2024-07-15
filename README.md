@@ -145,7 +145,7 @@ Menu:
 });
 ```
 
-## Användning av CRUD
+## Användning av HTTP metoder
 
 ### Booking:
 
