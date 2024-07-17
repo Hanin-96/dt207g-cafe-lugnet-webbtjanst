@@ -11,6 +11,7 @@ const adminAuthRoute = require("./routes/adminAuthRoute");
 const menuAuthRoute = require("./routes/menuAuthRoute");
 const bookingAuthRoute = require("./routes/bookingAuthRoute");
 
+/*
 // Aktivera CORS middleware för rutter
 const corsRoute = {
     origin: 'https://adorable-pony-2cfe6c.netlify.app', 
@@ -18,7 +19,7 @@ const corsRoute = {
 }
 
 app.use(cors(corsRoute));
-
+*/
 
 //Express JSON middleware
 app.use(express.json());
