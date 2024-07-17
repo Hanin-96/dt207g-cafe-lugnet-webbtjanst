@@ -21,7 +21,7 @@ const corsRoute = {
 app.use(cors(corsRoute));
 */
 
-app.use(cors);
+app.use(cors());
 
 //Express JSON middleware
 app.use(express.json());
