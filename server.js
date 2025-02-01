@@ -13,8 +13,9 @@ const bookingAuthRoute = require("./routes/bookingAuthRoute");
 
 
 // Aktivera CORS middleware för rutter
+//https://adorable-pony-2cfe6c.netlify.app
 const corsRoute = {
-    origin: 'https://adorable-pony-2cfe6c.netlify.app', 
+    origin: '*', 
     methods: ['GET', 'POST', 'PUT', 'DELETE']
 }
 
